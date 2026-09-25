@@ -1,0 +1,1521 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>Guia do TierCRM</title>
+    <meta
+      name="description"
+      content="Apresentação didática do TierCRM para a equipe da Top Tier Infrastructure."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700&family=Source+Serif+4:wght@600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --color-bg: #ffffff;
+        --color-bg-alt: #f6f7f9;
+        --color-surface: #ffffff;
+        --color-border: #dde1e6;
+        --color-text: #1c2127;
+        --color-text-muted: #5b6472;
+        --color-primary: #1f4b8f;
+        --color-primary-dark: #163767;
+        --color-accent: #b3550f;
+        --color-warn-bg: #fdf3e5;
+        --color-warn-border: #e0a458;
+        --color-danger-bg: #fceceb;
+        --color-danger-border: #d16a5e;
+        --color-ok-bg: #eaf4ee;
+        --color-ok-border: #5f9c73;
+        --color-code-bg: #eef0f3;
+        --color-on-primary: #ffffff;
+        --shadow-card:
+          0 1px 2px rgba(20, 24, 30, 0.06), 0 1px 1px rgba(20, 24, 30, 0.04);
+        --font-body:
+          "Source Sans 3", "Segoe UI", system-ui, -apple-system, sans-serif;
+        --font-heading: "Source Serif 4", Georgia, "Times New Roman", serif;
+      }
+
+      @media (prefers-color-scheme: dark) {
+        :root:not([data-theme="light"]) {
+          --color-bg: #14171c;
+          --color-bg-alt: #1a1e24;
+          --color-surface: #1d2128;
+          --color-border: #333a44;
+          --color-text: #e7e9ec;
+          --color-text-muted: #a3aab5;
+          --color-primary: #7ea6e8;
+          --color-primary-dark: #a9c4f0;
+          --color-accent: #e3a15f;
+          --color-warn-bg: #332617;
+          --color-warn-border: #b07a34;
+          --color-danger-bg: #34201e;
+          --color-danger-border: #b3564a;
+          --color-ok-bg: #1c2b21;
+          --color-ok-border: #4c8562;
+          --color-code-bg: #262b33;
+          --color-on-primary: #0f1a2e;
+          --shadow-card: 0 1px 2px rgba(0, 0, 0, 0.4);
+        }
+      }
+
+      :root[data-theme="dark"] {
+        --color-bg: #14171c;
+        --color-bg-alt: #1a1e24;
+        --color-surface: #1d2128;
+        --color-border: #333a44;
+        --color-text: #e7e9ec;
+        --color-text-muted: #a3aab5;
+        --color-primary: #7ea6e8;
+        --color-primary-dark: #a9c4f0;
+        --color-accent: #e3a15f;
+        --color-warn-bg: #332617;
+        --color-warn-border: #b07a34;
+        --color-danger-bg: #34201e;
+        --color-danger-border: #b3564a;
+        --color-ok-bg: #1c2b21;
+        --color-ok-border: #4c8562;
+        --color-code-bg: #262b33;
+        --color-on-primary: #0f1a2e;
+        --shadow-card: 0 1px 2px rgba(0, 0, 0, 0.4);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        -webkit-text-size-adjust: 100%;
+      }
+
+      body {
+        margin: 0;
+        padding: 0;
+        background: var(--color-bg);
+        color: var(--color-text);
+        font-family: var(--font-body);
+        line-height: 1.6;
+        overflow-x: hidden;
+      }
+
+      .page {
+        max-width: 880px;
+        margin: 0 auto;
+        padding: 32px 16px 64px;
+      }
+
+      header.masthead {
+        border-bottom: 3px solid var(--color-primary);
+        padding-bottom: 20px;
+        margin-bottom: 28px;
+      }
+
+      header.masthead .eyebrow {
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        font-size: 0.78rem;
+        color: var(--color-text-muted);
+        font-weight: 600;
+      }
+
+      header.masthead h1 {
+        font-family: var(--font-heading);
+        font-size: clamp(1.8rem, 5vw, 2.5rem);
+        margin: 6px 0 8px;
+        color: var(--color-text);
+      }
+
+      header.masthead p.lede {
+        font-size: 1.05rem;
+        color: var(--color-text-muted);
+        max-width: 65ch;
+        margin: 0;
+      }
+
+      header.masthead .meta-row {
+        margin-top: 14px;
+        font-size: 0.9rem;
+        color: var(--color-text-muted);
+      }
+
+      nav.toc {
+        background: var(--color-bg-alt);
+        border: 1px solid var(--color-border);
+        border-radius: 10px;
+        padding: 18px 22px;
+        margin-bottom: 36px;
+      }
+
+      nav.toc h2 {
+        margin: 0 0 10px;
+        font-size: 0.95rem;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        color: var(--color-text-muted);
+      }
+
+      nav.toc ol {
+        columns: 2;
+        column-gap: 28px;
+        margin: 0;
+        padding-left: 1.2em;
+      }
+
+      nav.toc li {
+        break-inside: avoid;
+        margin-bottom: 6px;
+      }
+
+      nav.toc a {
+        color: var(--color-primary);
+        text-decoration: none;
+        font-size: 0.95rem;
+      }
+
+      nav.toc a:hover {
+        text-decoration: underline;
+      }
+
+      @media (max-width: 560px) {
+        nav.toc ol {
+          columns: 1;
+        }
+      }
+
+      section {
+        margin-bottom: 44px;
+        scroll-margin-top: 16px;
+      }
+
+      section h2 {
+        font-family: var(--font-heading);
+        font-size: 1.5rem;
+        color: var(--color-primary-dark);
+        border-bottom: 1px solid var(--color-border);
+        padding-bottom: 8px;
+        margin: 0 0 16px;
+      }
+
+      section h3 {
+        font-size: 1.12rem;
+        margin: 22px 0 8px;
+        color: var(--color-text);
+      }
+
+      p {
+        margin: 0 0 12px;
+      }
+
+      ul,
+      ol {
+        padding-left: 1.3em;
+      }
+      li {
+        margin-bottom: 6px;
+      }
+
+      ol.steps {
+        counter-reset: step;
+        list-style: none;
+        padding-left: 0;
+      }
+
+      ol.steps > li {
+        counter-increment: step;
+        position: relative;
+        padding: 10px 14px 10px 46px;
+        margin-bottom: 8px;
+        background: var(--color-bg-alt);
+        border: 1px solid var(--color-border);
+        border-radius: 8px;
+      }
+
+      ol.steps > li::before {
+        content: counter(step);
+        position: absolute;
+        left: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        background: var(--color-primary);
+        color: var(--color-on-primary);
+        font-size: 0.82rem;
+        font-weight: 700;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .card {
+        background: var(--color-surface);
+        border: 1px solid var(--color-border);
+        border-radius: 10px;
+        padding: 18px 20px;
+        box-shadow: var(--shadow-card);
+        margin: 16px 0;
+      }
+
+      .callout {
+        border-radius: 10px;
+        padding: 14px 18px;
+        margin: 16px 0;
+        border: 1px solid var(--color-border);
+        font-size: 0.97rem;
+      }
+
+      .callout.warn {
+        background: var(--color-warn-bg);
+        border-color: var(--color-warn-border);
+      }
+
+      .callout.danger {
+        background: var(--color-danger-bg);
+        border-color: var(--color-danger-border);
+      }
+
+      .callout.ok {
+        background: var(--color-ok-bg);
+        border-color: var(--color-ok-border);
+      }
+
+      .callout strong.label {
+        display: block;
+        text-transform: uppercase;
+        font-size: 0.74rem;
+        letter-spacing: 0.06em;
+        margin-bottom: 6px;
+        color: var(--color-text-muted);
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 14px 0;
+        font-size: 0.94rem;
+      }
+
+      @media (max-width: 560px) {
+        table {
+          font-size: 0.84rem;
+        }
+        th,
+        td {
+          padding: 6px 7px;
+          overflow-wrap: anywhere;
+        }
+      }
+
+      caption {
+        text-align: left;
+        font-size: 0.85rem;
+        color: var(--color-text-muted);
+        margin-bottom: 6px;
+      }
+
+      th,
+      td {
+        border: 1px solid var(--color-border);
+        padding: 8px 10px;
+        text-align: left;
+        vertical-align: top;
+      }
+
+      th {
+        background: var(--color-bg-alt);
+        font-weight: 700;
+      }
+
+      code {
+        background: var(--color-code-bg);
+        padding: 1px 6px;
+        border-radius: 4px;
+        font-size: 0.88em;
+        font-family: "SFMono-Regular", Consolas, Menlo, monospace;
+      }
+
+      .role-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 12px;
+        margin: 16px 0;
+      }
+
+      @media (max-width: 640px) {
+        .role-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      .role-card {
+        border: 1px solid var(--color-border);
+        border-radius: 10px;
+        padding: 14px 16px;
+        background: var(--color-surface);
+      }
+
+      .role-card h4 {
+        margin: 0 0 6px;
+        font-size: 1rem;
+        color: var(--color-primary-dark);
+      }
+
+      .role-card p {
+        font-size: 0.9rem;
+        color: var(--color-text-muted);
+        margin: 0;
+      }
+
+      .diagram-wrap {
+        background: var(--color-surface);
+        border: 1px solid var(--color-border);
+        border-radius: 10px;
+        padding: 16px;
+        margin: 16px 0;
+      }
+
+      .diagram-wrap {
+        overflow-x: auto;
+      }
+      .diagram-wrap svg {
+        min-width: 620px;
+        width: 100%;
+        height: auto;
+        display: block;
+      }
+
+      @media (max-width: 640px) {
+        .diagram-wrap::before {
+          content: "Arraste o diagrama para o lado para ver tudo.";
+          display: block;
+          font-size: 0.8rem;
+          color: var(--color-text-muted);
+          margin-bottom: 6px;
+        }
+      }
+
+      .diagram-caption {
+        font-size: 0.85rem;
+        color: var(--color-text-muted);
+        margin-top: 8px;
+      }
+
+      svg text {
+        font-family: var(--font-body);
+        fill: var(--color-text);
+      }
+
+      .svg-box {
+        fill: var(--color-bg-alt);
+        stroke: var(--color-border);
+        stroke-width: 1.5;
+      }
+      .svg-box-primary {
+        fill: var(--color-primary);
+        stroke: var(--color-primary-dark);
+        stroke-width: 1.5;
+      }
+      .svg-box-accent {
+        fill: var(--color-warn-bg);
+        stroke: var(--color-warn-border);
+        stroke-width: 1.5;
+      }
+      .svg-box-ok {
+        fill: var(--color-ok-bg);
+        stroke: var(--color-ok-border);
+        stroke-width: 1.5;
+      }
+      .svg-arrow {
+        stroke: var(--color-text-muted);
+        stroke-width: 2;
+        fill: none;
+        marker-end: url(#arrowhead);
+      }
+      .svg-label-primary {
+        fill: var(--color-on-primary);
+        font-weight: 600;
+      }
+      .svg-label {
+        fill: var(--color-text);
+      }
+      .svg-sub {
+        fill: var(--color-text-muted);
+        font-size: 11px;
+      }
+
+      footer.doc-footer {
+        margin-top: 56px;
+        padding-top: 18px;
+        border-top: 1px solid var(--color-border);
+        font-size: 0.85rem;
+        color: var(--color-text-muted);
+      }
+
+      a {
+        color: var(--color-primary);
+      }
+
+      .back-to-top {
+        font-size: 0.82rem;
+      }
+
+      @media print {
+        nav.toc {
+          break-inside: avoid;
+        }
+        section {
+          break-inside: avoid-page;
+          margin-bottom: 24px;
+        }
+        .back-to-top {
+          display: none;
+        }
+        body {
+          background: #fff;
+          color: #000;
+        }
+        a {
+          color: #000;
+          text-decoration: underline;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page">
+      <header class="masthead">
+        <div class="eyebrow">Top Tier Infrastructure · guia interno</div>
+        <h1>Guia do TierCRM</h1>
+        <p class="lede">
+          Uma apresentação do CRM comercial da Top Tier para quem vai usá-lo no
+          dia a dia — Doria e Giorgio. Enviado pelo Zero, administrador do
+          sistema.
+        </p>
+        <div class="meta-row">Versão do documento 1.2 · 25/09/2026</div>
+      </header>
+
+      <nav class="toc" aria-label="Índice">
+        <h2>Índice</h2>
+        <ol>
+          <li><a href="#resumo">1. O que é o TierCRM</a></li>
+          <li><a href="#primeiros-passos">2. Primeiros passos</a></li>
+          <li><a href="#passo-a-passo">3. Passo a passo do dia a dia</a></li>
+          <li><a href="#funil">4. O funil de vendas</a></li>
+          <li><a href="#integracao-site">5. Do site ao CRM</a></li>
+          <li><a href="#equipe">6. Trabalho em equipe</a></li>
+          <li><a href="#ia">7. Pontuação de IA</a></li>
+          <li><a href="#cuidados">8. Contatos duplicados: como fundir</a></li>
+          <li><a href="#sugestoes">9. Como ajudar com sugestões</a></li>
+        </ol>
+      </nav>
+
+      <!-- ============ 1. RESUMO ============ -->
+      <section id="resumo">
+        <h2>1. O que é o TierCRM</h2>
+        <p>
+          O <strong>TierCRM</strong> é o CRM comercial da Top Tier
+          Infrastructure — o lugar onde vivem os contatos, as empresas e os
+          negócios que a Top Tier está trabalhando. Ele acompanha cada
+          oportunidade desde o primeiro contato até o fechamento (ou a perda),
+          guarda notas e tarefas de cada relacionamento, e usa um pouco de
+          inteligência artificial para ajudar a priorizar quem atender primeiro.
+        </p>
+        <p>
+          Funciona no computador e no celular, pelo mesmo endereço, e pode ser
+          instalado como aplicativo (mais detalhes no capítulo 2).
+        </p>
+        <h3>Quem usa o quê</h3>
+        <p>
+          Cada pessoa tem um <strong>papel</strong>, e o papel decide o que
+          aparece na tela — não é preciso adivinhar o que é permitido, porque o
+          que não é permitido simplesmente não é oferecido:
+        </p>
+        <div class="role-grid">
+          <div class="role-card">
+            <h4>Administrador</h4>
+            <p>
+              O Zero. Acesso completo: usuários, configurações do funil, e as
+              três funções de inteligência (pontuar com IA, resumo de conta e
+              auditoria TierScope).
+            </p>
+          </div>
+          <div class="role-card">
+            <h4>Usuário comum</h4>
+            <p>
+              A Doria e o Giorgio. Todo o trabalho comercial: criar e editar
+              contatos, empresas, negócios, tarefas e notas, mover cartões,
+              importar e exportar. Não mexe em usuários nem em configurações.
+            </p>
+          </div>
+          <div class="role-card">
+            <h4>Somente leitura</h4>
+            <p>
+              Vê e exporta, não altera nada. Serve para quem acompanha o funil
+              sem precisar mexer no dado. Hoje ninguém está nesse papel.
+            </p>
+          </div>
+        </div>
+        <p style="font-size: 0.9rem; color: var(--color-text-muted)">
+          Se um botão que alguém mencionou não aparece para você, o motivo mais
+          provável é o papel — não um defeito. Peça ao Zero.
+        </p>
+      </section>
+
+      <!-- ============ 2. PRIMEIROS PASSOS ============ -->
+      <section id="primeiros-passos">
+        <h2>2. Primeiros passos</h2>
+
+        <h3>Acessar</h3>
+        <p>
+          O endereço do TierCRM é
+          <a href="https://silvaj1zero.github.io/tiercrm-app"
+            ><code>silvaj1zero.github.io/tiercrm-app</code></a
+          >. Ele funciona igual no computador e no celular.
+        </p>
+
+        <h3>Entrar (login)</h3>
+        <ul>
+          <li>
+            <strong>Primeiro acesso:</strong> chega um convite por e-mail ("Você
+            foi convidado para o TierCRM"). Clique no link e crie sua senha —
+            olhe a caixa de spam se não achar o e-mail.
+          </li>
+          <li>
+            <strong>Esqueceu a senha?</strong> Na tela de entrada, clique em
+            "Esqueceu a senha?" e digite seu e-mail. Chega uma mensagem de
+            <code>crm@toptier.net.br</code> em poucos segundos (olhe o spam se
+            demorar); o link para redefinir vale por pouco tempo. Se nada
+            chegar, fale com o Zero.
+          </li>
+        </ul>
+
+        <h3>Instalar no celular (recomendado)</h3>
+        <p>
+          Instalado, o TierCRM vira um aplicativo com ícone próprio, sem barra
+          de navegador — e ocupa a tela toda como qualquer app.
+        </p>
+        <ul>
+          <li>
+            <strong>iPhone:</strong> abra o endereço <em>no Safari</em> — só
+            nele aparece a opção. Toque em Compartilhar → "Adicionar à Tela de
+            Início". Pelo Chrome do iPhone a opção não existe.
+          </li>
+          <li>
+            <strong>Android:</strong> abra no Chrome, toque no menu (⋮) →
+            "Instalar app" (às vezes o próprio navegador oferece sozinho).
+          </li>
+          <li>
+            Depois de instalado, <strong>abra sempre pelo ícone</strong> da tela
+            inicial, nunca pelo navegador — assim você não cai numa segunda
+            cópia que pede login de novo.
+          </li>
+          <li>
+            Quando sai versão nova, o app se atualiza sozinho, mas só quando é
+            fechado de verdade. Se algo parecer velho, feche o app, tire-o dos
+            recentes e abra de novo.
+          </li>
+        </ul>
+
+        <h3>Tour pelas telas</h3>
+        <table>
+          <tr>
+            <th>Tela</th>
+            <th>O que tem</th>
+          </tr>
+          <tr>
+            <td>Painel</td>
+            <td>
+              No computador, os quatro números da governança semanal (receita
+              contratada, propostas emitidas, conversão Farming, custo/hora
+              auditor), contatos quentes e próximas tarefas. No celular, o
+              Painel traz boas-vindas e a atividade recente — as tarefas ficam
+              na aba própria, Tarefas.
+            </td>
+          </tr>
+          <tr>
+            <td>Contatos</td>
+            <td>Lista de pessoas, com busca por nome ou empresa no topo.</td>
+          </tr>
+          <tr>
+            <td>Empresas</td>
+            <td>
+              Lista de empresas, cada uma reunindo seus contatos e negócios. No
+              computador. No celular você chega à empresa pelo nome dela dentro
+              da ficha de um contato.
+            </td>
+          </tr>
+          <tr>
+            <td>Negócios (Kanban)</td>
+            <td>
+              O quadro de oportunidades, organizado por frente e estágio (ver
+              capítulo 4). No computador arrasta-se o cartão entre colunas; no
+              celular, toca-se no cartão e usa-se "Mover estágio".
+            </td>
+          </tr>
+          <tr>
+            <td>Tarefas</td>
+            <td>Combinados com prazo, ligados a um contato ou negócio.</td>
+          </tr>
+        </table>
+      </section>
+
+      <!-- ============ 3. PASSO A PASSO ============ -->
+      <section id="passo-a-passo">
+        <h2>3. Passo a passo do dia a dia</h2>
+
+        <h3>Registrar um contato novo</h3>
+        <ol class="steps">
+          <li>Abra <em>Contatos</em> e clique em "Novo contato".</li>
+          <li>
+            Preencha nome, e-mail (quando tiver) e telefone. Todo telefone
+            cadastrado ganha um atalho de WhatsApp ao lado, na ficha do contato.
+          </li>
+          <li>
+            Escolha a <em>Origem</em> (LinkedIn, base histórica, indicação,
+            evento, landing page, ou uma das origens de site — ver capítulo 5).
+          </li>
+          <li>
+            Vincule a uma empresa, se ela já existir, ou crie a empresa na hora
+            pelo mesmo formulário.
+          </li>
+          <li>
+            Salve. O contato nasce com status "frio" — o status muda para
+            "morno" ou "quente" quando você adiciona uma nota.
+          </li>
+        </ol>
+
+        <h3>Registrar uma empresa nova</h3>
+        <ol class="steps">
+          <li>
+            Abra <em>Empresas</em> (só no computador) e clique em "Nova
+            empresa".
+          </li>
+          <li>Preencha o nome e os dados cadastrais disponíveis.</li>
+          <li>
+            Salve. A partir daí, os contatos e negócios vinculados a ela
+            aparecem juntos na ficha da empresa.
+          </li>
+        </ol>
+
+        <h3>Registrar um negócio novo</h3>
+        <ol class="steps">
+          <li>Abra <em>Negócios</em> e clique em "Novo negócio".</li>
+          <li>
+            Escolha a <em>Frente</em> primeiro — o campo Estágio passa a mostrar
+            só os estágios daquela frente (ver capítulo 4).
+          </li>
+          <li>
+            Preencha Serviço, Ticket (R$), Previsão de fechamento e o
+            Responsável.
+          </li>
+          <li>
+            Salve. O negócio aparece na coluna do primeiro estágio da frente
+            escolhida.
+          </li>
+        </ol>
+
+        <h3>Registrar uma nota</h3>
+        <ol class="steps">
+          <li>
+            Abra o contato (ou o negócio) sobre o qual quer registrar algo.
+          </li>
+          <li>Vá até a aba de notas e escreva o que aconteceu na conversa.</li>
+          <li>
+            Salve. A regra de bolso do TierCRM: se aconteceu uma conversa e o
+            quadro não mudou nem ganhou nota, a conversa "não existiu" para a
+            empresa.
+          </li>
+        </ol>
+
+        <h3>Registrar uma tarefa</h3>
+        <ol class="steps">
+          <li>
+            No contato (ou pela tela de Tarefas), clique em "Nova tarefa".
+          </li>
+          <li>
+            Escolha o tipo — por exemplo E-mail, Demonstração, Reunião,
+            Follow-up, Agradecimento, Envio ou Ligação.
+          </li>
+          <li>
+            Defina um prazo. Tarefas com prazo aparecem no Painel, em "Próximas
+            tarefas" (só no computador — no celular, aba Tarefas).
+          </li>
+          <li>Salve.</li>
+        </ol>
+
+        <div class="callout warn">
+          <strong class="label">Automático</strong>
+          Todo dia às 8h o sistema verifica negócios sem movimento há mais de 14
+          dias e cria, para o responsável, uma tarefa "[Negócio parado]". A
+          reação certa é sempre uma das duas: agir (contatar e mover o cartão)
+          ou decidir (mover para Perdido, com uma nota explicando o motivo).
+          Deixar a tarefa acumulando é o único erro.
+        </div>
+      </section>
+
+      <!-- ============ 4. FUNIL ============ -->
+      <section id="funil">
+        <h2>4. O funil de vendas</h2>
+        <p>
+          Todo negócio vive em uma <strong>frente</strong> (o funil daquela
+          linha de negócio) e avança por <strong>estágios</strong> dentro dela.
+          Cada frente tem seus próprios estágios e seu próprio estágio final de
+          "Perdido". A Top Tier trabalha com quatro frentes:
+        </p>
+
+        <div class="diagram-wrap">
+          <svg
+            viewBox="0 0 760 300"
+            role="img"
+            aria-label="Diagrama das quatro frentes do funil e seus estágios"
+          >
+            <defs>
+              <marker
+                id="arrowhead"
+                markerWidth="8"
+                markerHeight="8"
+                refX="6"
+                refY="3"
+                orient="auto"
+              >
+                <path
+                  d="M0,0 L6,3 L0,6 Z"
+                  fill="var(--color-text-muted)"
+                ></path>
+              </marker>
+            </defs>
+
+            <!-- Farming row -->
+            <text
+              x="10"
+              y="20"
+              class="svg-label"
+              font-size="13"
+              font-weight="700"
+            >
+              Farming — base histórica
+            </text>
+            <g font-size="11">
+              <rect
+                x="10"
+                y="28"
+                width="110"
+                height="34"
+                rx="6"
+                class="svg-box"
+              ></rect>
+              <text x="65" y="49" text-anchor="middle" class="svg-label">
+                Contato
+              </text>
+              <line x1="120" y1="45" x2="150" y2="45" class="svg-arrow"></line>
+              <rect
+                x="150"
+                y="28"
+                width="110"
+                height="34"
+                rx="6"
+                class="svg-box"
+              ></rect>
+              <text x="205" y="49" text-anchor="middle" class="svg-label">
+                Reunião
+              </text>
+              <line x1="260" y1="45" x2="290" y2="45" class="svg-arrow"></line>
+              <rect
+                x="290"
+                y="28"
+                width="110"
+                height="34"
+                rx="6"
+                class="svg-box"
+              ></rect>
+              <text x="345" y="49" text-anchor="middle" class="svg-label">
+                Proposta
+              </text>
+              <line x1="400" y1="45" x2="430" y2="45" class="svg-arrow"></line>
+              <rect
+                x="430"
+                y="28"
+                width="110"
+                height="34"
+                rx="6"
+                class="svg-box-ok"
+              ></rect>
+              <text x="485" y="49" text-anchor="middle" class="svg-label">
+                Contrato
+              </text>
+            </g>
+
+            <!-- Hunting row -->
+            <text
+              x="10"
+              y="88"
+              class="svg-label"
+              font-size="13"
+              font-weight="700"
+            >
+              Hunting — colocation / DC modular
+            </text>
+            <g font-size="10.5">
+              <rect
+                x="10"
+                y="96"
+                width="110"
+                height="34"
+                rx="6"
+                class="svg-box"
+              ></rect>
+              <text x="65" y="117" text-anchor="middle" class="svg-label">
+                Qualificação
+              </text>
+              <line
+                x1="120"
+                y1="113"
+                x2="150"
+                y2="113"
+                class="svg-arrow"
+              ></line>
+              <rect
+                x="150"
+                y="96"
+                width="120"
+                height="34"
+                rx="6"
+                class="svg-box"
+              ></rect>
+              <text x="210" y="117" text-anchor="middle" class="svg-label">
+                Visita técnica
+              </text>
+              <line
+                x1="270"
+                y1="113"
+                x2="300"
+                y2="113"
+                class="svg-arrow"
+              ></line>
+              <rect
+                x="300"
+                y="96"
+                width="110"
+                height="34"
+                rx="6"
+                class="svg-box"
+              ></rect>
+              <text x="355" y="117" text-anchor="middle" class="svg-label">
+                Proposta
+              </text>
+              <line
+                x1="410"
+                y1="113"
+                x2="440"
+                y2="113"
+                class="svg-arrow"
+              ></line>
+              <rect
+                x="440"
+                y="96"
+                width="110"
+                height="34"
+                rx="6"
+                class="svg-box-ok"
+              ></rect>
+              <text x="495" y="117" text-anchor="middle" class="svg-label">
+                Fechamento
+              </text>
+            </g>
+
+            <!-- Seeding row -->
+            <text
+              x="10"
+              y="156"
+              class="svg-label"
+              font-size="13"
+              font-weight="700"
+            >
+              Seeding — mid-market TierScope
+            </text>
+            <g font-size="11">
+              <rect
+                x="10"
+                y="164"
+                width="110"
+                height="34"
+                rx="6"
+                class="svg-box"
+              ></rect>
+              <text x="65" y="185" text-anchor="middle" class="svg-label">
+                Lead
+              </text>
+              <line
+                x1="120"
+                y1="181"
+                x2="150"
+                y2="181"
+                class="svg-arrow"
+              ></line>
+              <rect
+                x="150"
+                y="164"
+                width="110"
+                height="34"
+                rx="6"
+                class="svg-box"
+              ></rect>
+              <text x="205" y="185" text-anchor="middle" class="svg-label">
+                Demo
+              </text>
+              <line
+                x1="260"
+                y1="181"
+                x2="290"
+                y2="181"
+                class="svg-arrow"
+              ></line>
+              <rect
+                x="290"
+                y="164"
+                width="150"
+                height="34"
+                rx="6"
+                class="svg-box-ok"
+              ></rect>
+              <text x="365" y="185" text-anchor="middle" class="svg-label">
+                Piloto agendado
+              </text>
+            </g>
+
+            <!-- Treinamentos row -->
+            <text
+              x="10"
+              y="224"
+              class="svg-label"
+              font-size="13"
+              font-weight="700"
+            >
+              Treinamentos — ICOR / Top Tier
+            </text>
+            <g font-size="11">
+              <rect
+                x="10"
+                y="232"
+                width="110"
+                height="34"
+                rx="6"
+                class="svg-box"
+              ></rect>
+              <text x="65" y="253" text-anchor="middle" class="svg-label">
+                Lead
+              </text>
+              <line
+                x1="120"
+                y1="249"
+                x2="150"
+                y2="249"
+                class="svg-arrow"
+              ></line>
+              <rect
+                x="150"
+                y="232"
+                width="110"
+                height="34"
+                rx="6"
+                class="svg-box"
+              ></rect>
+              <text x="205" y="253" text-anchor="middle" class="svg-label">
+                Proposta
+              </text>
+              <line
+                x1="260"
+                y1="249"
+                x2="290"
+                y2="249"
+                class="svg-arrow"
+              ></line>
+              <rect
+                x="290"
+                y="232"
+                width="120"
+                height="34"
+                rx="6"
+                class="svg-box-ok"
+              ></rect>
+              <text x="350" y="253" text-anchor="middle" class="svg-label">
+                Matrícula
+              </text>
+            </g>
+
+            <text x="10" y="284" class="svg-sub">
+              Verde = estágio de ganho. Toda frente também tem um estágio
+              "Perdido", à parte da sequência.
+            </text>
+          </svg>
+          <p class="diagram-caption">
+            As quatro frentes e seus estágios reais, configurados no TierCRM.
+            Cada frente também tem, além da sequência, um estágio "Perdido".
+          </p>
+        </div>
+
+        <p>
+          Além da frente e do estágio, todo negócio carrega:
+          <strong>Serviço</strong> (Certificação FOMM, Supervisão, Acervo
+          Técnico Vivo, Raio-X Documental, TierScope, Treinamento ICOR ou
+          Treinamento Top Tier), <strong>Ticket (R$)</strong>,
+          <strong>Previsão de fechamento</strong> e
+          <strong>Responsável</strong>.
+        </p>
+
+        <div class="callout ok">
+          <strong class="label">Frentes desativadas</strong>
+          Uma frente pode ser encerrada pelo administrador porque aquele funil
+          deixou de fazer sentido — não porque os negócios dentro dele sumiram.
+          Quando isso acontece, os negócios saem do quadro ativo e passam a
+          aparecer numa seção própria, abaixo do kanban, no computador (nada é
+          apagado). No celular essa seção não existe: o kanban mostra só as
+          frentes ativas. Se um negócio "sumiu" do funil, confira antes se a
+          frente dele foi encerrada.
+        </div>
+      </section>
+
+      <!-- ============ 5. INTEGRAÇÃO COM OS SITES ============ -->
+      <section id="integracao-site">
+        <h2>5. Integração com os sites: do formulário ao CRM</h2>
+        <p>
+          Desde setembro de 2026, quatro formulários dos sites da Top Tier criam
+          contato e negócio no CRM sozinhos, sem ninguém digitar nada:
+        </p>
+        <table>
+          <tr>
+            <th>Formulário</th>
+            <th>Origem gravada no contato</th>
+            <th>Frente de destino</th>
+          </tr>
+          <tr>
+            <td>Contato (site Top Tier)</td>
+            <td>Site — contato</td>
+            <td>Hunting</td>
+          </tr>
+          <tr>
+            <td>Inscrição em curso</td>
+            <td>Site — inscrição em curso</td>
+            <td>Treinamentos</td>
+          </tr>
+          <tr>
+            <td>Top Tools (as quatro ferramentas)</td>
+            <td>Site — Top Tools</td>
+            <td>Hunting</td>
+          </tr>
+          <tr>
+            <td>Proposta (site ICOR Brasil)</td>
+            <td>Site — proposta ICOR</td>
+            <td>Treinamentos</td>
+          </tr>
+        </table>
+
+        <div class="diagram-wrap">
+          <svg
+            viewBox="0 0 760 210"
+            role="img"
+            aria-label="Fluxo do lead do formulário do site até o CRM"
+          >
+            <g font-size="11.5">
+              <rect
+                x="0"
+                y="20"
+                width="140"
+                height="50"
+                rx="8"
+                class="svg-box"
+              ></rect>
+              <text x="70" y="41" text-anchor="middle" class="svg-label">
+                Visitante preenche
+              </text>
+              <text x="70" y="57" text-anchor="middle" class="svg-label">
+                formulário do site
+              </text>
+
+              <line x1="140" y1="45" x2="180" y2="45" class="svg-arrow"></line>
+
+              <rect
+                x="180"
+                y="20"
+                width="150"
+                height="50"
+                rx="8"
+                class="svg-box"
+              ></rect>
+              <text x="255" y="41" text-anchor="middle" class="svg-label">
+                Servidor do site
+              </text>
+              <text x="255" y="57" text-anchor="middle" class="svg-label">
+                envia o e-mail sempre
+              </text>
+
+              <line x1="330" y1="45" x2="370" y2="45" class="svg-arrow"></line>
+
+              <rect
+                x="370"
+                y="20"
+                width="160"
+                height="50"
+                rx="8"
+                class="svg-box-primary"
+              ></rect>
+              <text
+                x="450"
+                y="41"
+                text-anchor="middle"
+                class="svg-label-primary"
+              >
+                Endpoint do CRM
+              </text>
+              <text
+                x="450"
+                y="57"
+                text-anchor="middle"
+                class="svg-label-primary"
+              >
+                (inbound_lead)
+              </text>
+
+              <line x1="530" y1="45" x2="570" y2="45" class="svg-arrow"></line>
+
+              <rect
+                x="570"
+                y="20"
+                width="180"
+                height="50"
+                rx="8"
+                class="svg-box-ok"
+              ></rect>
+              <text x="660" y="41" text-anchor="middle" class="svg-label">
+                Contato + negócio
+              </text>
+              <text x="660" y="57" text-anchor="middle" class="svg-label">
+                criados no CRM
+              </text>
+            </g>
+
+            <line x1="660" y1="70" x2="660" y2="105" class="svg-arrow"></line>
+            <rect
+              x="540"
+              y="105"
+              width="220"
+              height="42"
+              rx="8"
+              class="svg-box-accent"
+            ></rect>
+            <text
+              x="650"
+              y="122"
+              text-anchor="middle"
+              class="svg-label"
+              font-size="11"
+            >
+              Nota com a mensagem do
+            </text>
+            <text
+              x="650"
+              y="138"
+              text-anchor="middle"
+              class="svg-label"
+              font-size="11"
+            >
+              formulário, no contato
+            </text>
+
+            <text
+              x="0"
+              y="105"
+              class="svg-label"
+              font-size="11"
+              font-weight="700"
+            >
+              Se o e-mail já existir na base:
+            </text>
+            <text x="0" y="122" class="svg-sub">
+              o contato não é duplicado — ele
+            </text>
+            <text x="0" y="136" class="svg-sub">só ganha o negócio novo.</text>
+
+            <text x="0" y="170" class="svg-sub">
+              O responsável inicial de todo lead do site é um administrador — o
+              primeiro passo de quem pegar o lead é trocar o responsável para
+              si.
+            </text>
+            <text x="0" y="188" class="svg-sub">
+              O lead chega sem valor e sem prazo (o formulário não pergunta
+              isso): preencha Ticket e Previsão de fechamento ao qualificar.
+            </text>
+          </svg>
+          <p class="diagram-caption">
+            O e-mail para a caixa <code>contato@</code> continua sendo enviado
+            sempre — a chegada ao CRM é um passo adicional, não uma
+            substituição.
+          </p>
+        </div>
+
+        <div class="callout warn">
+          <strong class="label">O lead não se atende sozinho</strong>
+          O formulário só coloca o contato e o negócio no CRM — a partir daí é
+          trabalho de gente. Quando um lead chegar: (1) troque o responsável
+          para você; (2) preencha Ticket e Previsão de fechamento assim que
+          qualificar; (3) leia a nota criada a partir da mensagem do visitante;
+          (4) se o negócio aparecer numa frente encerrada, mova-o para a frente
+          certa (ele entra assim mesmo, com uma nota de alerta — ninguém se
+          perde por causa disso); (5) reenviar o mesmo formulário duas vezes
+          cria dois negócios iguais — apague o excedente se acontecer.
+        </div>
+
+        <div class="callout ok">
+          <strong class="label">Nota de "Possível duplicata"</strong>
+          Muitos contatos da base histórica foram cadastrados sem e-mail. Quando
+          chega um lead com o mesmo nome e sobrenome de um desses contatos, o
+          CRM deixa no contato novo uma nota "Possível duplicata", com o número
+          (id) do cadastro antigo. Abra os dois e confira pela empresa, pelo
+          cargo ou pelo LinkedIn: nome igual não prova que é a mesma pessoa. Se
+          for, funda pela tela de contatos (capítulo 8) e o histórico do antigo,
+          incluindo a pontuação, passa para o que ficar. Se não for, ignore a
+          nota. O CRM nunca funde sozinho.
+        </div>
+      </section>
+
+      <!-- ============ 6. TRABALHO EM EQUIPE ============ -->
+      <section id="equipe">
+        <h2>6. Trabalho em equipe</h2>
+        <p>
+          Todo contato e todo negócio tem um <strong>Responsável</strong>. É
+          essa pessoa que aparece na fila de tarefas e que deve agir quando algo
+          muda — inclusive quando o alerta automático de "[Negócio parado]"
+          dispara.
+        </p>
+
+        <div class="diagram-wrap">
+          <svg
+            viewBox="0 0 760 130"
+            role="img"
+            aria-label="Fluxo do dia a dia: lead chega, responsável assume, cria tarefa, avança o estágio"
+          >
+            <g font-size="11.5">
+              <rect
+                x="0"
+                y="15"
+                width="150"
+                height="50"
+                rx="8"
+                class="svg-box-accent"
+              ></rect>
+              <text x="75" y="36" text-anchor="middle" class="svg-label">
+                Lead chega
+              </text>
+              <text x="75" y="52" text-anchor="middle" class="svg-label">
+                (site ou cadastro manual)
+              </text>
+
+              <line x1="150" y1="40" x2="188" y2="40" class="svg-arrow"></line>
+
+              <rect
+                x="188"
+                y="15"
+                width="150"
+                height="50"
+                rx="8"
+                class="svg-box"
+              ></rect>
+              <text x="263" y="36" text-anchor="middle" class="svg-label">
+                Responsável assume
+              </text>
+              <text x="263" y="52" text-anchor="middle" class="svg-label">
+                (troca para si)
+              </text>
+
+              <line x1="338" y1="40" x2="376" y2="40" class="svg-arrow"></line>
+
+              <rect
+                x="376"
+                y="15"
+                width="150"
+                height="50"
+                rx="8"
+                class="svg-box"
+              ></rect>
+              <text x="451" y="36" text-anchor="middle" class="svg-label">
+                Registra nota
+              </text>
+              <text x="451" y="52" text-anchor="middle" class="svg-label">
+                e cria tarefa com prazo
+              </text>
+
+              <line x1="526" y1="40" x2="564" y2="40" class="svg-arrow"></line>
+
+              <rect
+                x="564"
+                y="15"
+                width="196"
+                height="50"
+                rx="8"
+                class="svg-box-ok"
+              ></rect>
+              <text x="662" y="36" text-anchor="middle" class="svg-label">
+                Avança o estágio
+              </text>
+              <text x="662" y="52" text-anchor="middle" class="svg-label">
+                no kanban quando algo acontece
+              </text>
+            </g>
+            <text x="0" y="100" class="svg-sub">
+              Sem movimento há mais de 14 dias: o sistema cria sozinho, às 8h,
+              uma tarefa "[Negócio parado]" para o responsável.
+            </text>
+            <text x="0" y="118" class="svg-sub">
+              A partir daí, ou o responsável age (contata e move o cartão) ou
+              decide (move para Perdido, com uma nota do motivo).
+            </text>
+          </svg>
+          <p class="diagram-caption">
+            O ciclo diário: um lead sempre tem alguém dono dele, e o quadro
+            reflete o que de fato aconteceu.
+          </p>
+        </div>
+
+        <h3>Quem vê o quê</h3>
+        <p>
+          Os três papéis do capítulo 1 valem também aqui: o administrador vê e
+          mexe em tudo; o usuário comum vê e mexe em todo o trabalho comercial
+          (contatos, empresas, negócios, tarefas e notas de qualquer
+          responsável); o somente leitura só consulta. Não existe hoje uma
+          restrição de "cada um só vê os seus contatos" — Doria e Giorgio veem o
+          mesmo funil.
+        </p>
+      </section>
+
+      <!-- ============ 7. PONTUAÇÃO DE IA ============ -->
+      <section id="ia">
+        <h2>7. Pontuação de IA</h2>
+        <p>
+          O TierCRM usa inteligência artificial para
+          <strong>priorizar</strong> a base: cada contato pode receber uma nota
+          de 0 a 100 com uma justificativa, e cada empresa pode ganhar um resumo
+          executivo do relacionamento. Só o administrador aciona essas funções.
+        </p>
+        <h3>Como ler a nota</h3>
+        <ul>
+          <li>
+            Na lista de contatos, a nota aparece como uma etiqueta — por exemplo
+            <code>IA 78</code> — em verde a partir de 70, âmbar entre 40 e 69, e
+            cinza abaixo de 40.
+          </li>
+          <li>
+            Na ficha do contato, o bloco Score IA mostra a nota, a justificativa
+            por extenso e a data em que foi calculada.
+          </li>
+          <li>
+            Só são pontuados contatos que ainda não têm nota — rodar de novo
+            depois de importar gente nova cobre só os novos, não recalcula quem
+            já tinha pontuação.
+          </li>
+        </ul>
+        <div class="callout warn">
+          <strong class="label">A IA prioriza, ela não decide</strong>
+          A nota e o resumo são apoio de leitura da base — confira o contato
+          antes de agir, e nunca descarte alguém só porque a nota veio baixa.
+        </div>
+      </section>
+
+      <!-- ============ 8. FUSÃO DE CONTATOS ============ -->
+      <section id="cuidados">
+        <h2>8. Contatos duplicados: como fundir</h2>
+        <p>
+          Às vezes a mesma pessoa acaba com dois cadastros no CRM (por exemplo,
+          um contato antigo e um contato novo criado por um lead do site). A
+          tela do contato tem um botão para <strong>fundir</strong> os dois em
+          um só: você escolhe qual cadastro fica, e o outro é incorporado a ele.
+        </p>
+        <h3>O que a fusão preserva</h3>
+        <ul>
+          <li>E-mails, telefones e etiquetas dos dois cadastros.</li>
+          <li>
+            Notas, tarefas e negócios do cadastro removido, que passam para o
+            que fica.
+          </li>
+          <li>
+            A <strong>pontuação de IA</strong>: fica a mais recente dos dois,
+            com justificativa e data juntas.
+          </li>
+          <li>
+            A <strong>origem</strong> do cadastro mais antigo, que conta como o
+            contato entrou de verdade.
+          </li>
+        </ul>
+        <div class="callout ok">
+          <strong class="label">Corrigido em 24/09/2026</strong>
+          Até essa data, fundir apagava a pontuação de IA do cadastro removido;
+          isso aconteceu uma vez em produção. A correção está no ar (story de
+          manutenção 0.27), e a fusão pela tela voltou a ser segura.
+        </div>
+        <div class="callout warn">
+          <strong class="label">Antes de fundir, confira</strong>
+          Nome igual não quer dizer que é a mesma pessoa. Confirme pela empresa,
+          pelo e-mail ou pelo LinkedIn. A fusão apaga um dos dois cadastros e
+          não tem botão de desfazer. Na dúvida, avise o Zero.
+        </div>
+      </section>
+
+      <!-- ============ 9. SUGESTÕES ============ -->
+      <section id="sugestoes">
+        <h2>9. Como ajudar com sugestões</h2>
+        <p>
+          Não existe um sistema de tickets para o TierCRM — o canal é direto:
+          mande para o Zero, por mensagem, com estas quatro informações:
+        </p>
+        <ol class="steps">
+          <li><strong>O que você tentou fazer.</strong></li>
+          <li><strong>O que você esperava que acontecesse.</strong></li>
+          <li><strong>O que aconteceu de fato.</strong></li>
+          <li><strong>Um print da tela</strong>, se der.</li>
+        </ol>
+
+        <h3>Exemplos de boas sugestões</h3>
+        <ul>
+          <li>
+            "Tentei mover o negócio da Empresa Fictícia Ltda para 'Proposta',
+            mas o cartão voltou sozinho para a coluna anterior. Esperava que ele
+            ficasse na nova coluna. Aconteceu no celular, testei duas vezes."
+          </li>
+          <li>
+            "Achei um contato — Maria Exemplo — duplicado: um cadastro do
+            LinkedIn e outro criado por um lead do site. Não fundi porque o guia
+            pediu para avisar em vez de fundir."
+          </li>
+          <li>
+            "Seria útil filtrar as tarefas por tipo, não só por prazo, na aba
+            Tarefas do celular."
+          </li>
+        </ul>
+
+        <h3>O que acontece depois</h3>
+        <p>
+          O Zero registra o relato como um item de trabalho, prioriza junto com
+          o resto do que está em andamento, e — quando for o caso — abre uma
+          story de manutenção do jeito que já foi feito com outros achados de
+          uso real (por exemplo, a story 0.27, que nasceu de um relato sobre a
+          fusão de contatos). Nem toda sugestão vira mudança imediata, mas toda
+          sugestão é lida e registrada.
+        </p>
+      </section>
+
+      <footer class="doc-footer">
+        <p>
+          TierCRM · Top Tier Infrastructure · guia v1.2 (25/09/2026) · dúvidas e
+          sugestões: Zero (admin).
+        </p>
+        <p class="doc-download"><a href="./guia-da-equipe.pdf" rel="nofollow" download>Baixar PDF do guia</a></p>
+        <p class="back-to-top"><a href="#resumo">Voltar ao topo</a></p>
+      </footer>
+    </div>
+  </body>
+</html>
