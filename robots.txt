@@ -1,0 +1,9 @@
+# https://www.robotstxt.org/robotstxt.html
+User-agent: *
+Disallow:
+# Story 0.28 — VC-1: este robots.txt fica na raiz do app (subpath do
+# GitHub Pages), e buscadores só leem o robots.txt na raiz do DOMÍNIO, não
+# aqui — então esta linha não protege nada sozinha. A proteção efetiva é o
+# <meta name="robots" content="noindex, nofollow"> injetado em
+# dist/guia/index.html no build. Mantida por não custar nada (AC5).
+Disallow: /guia/
